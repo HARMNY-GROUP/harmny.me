@@ -1,1 +1,406 @@
-Coming soon...
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HARMNY | Client Downloads</title>
+    <link rel="icon" type="icon" href="src/icon.svg">
+    <style>
+        :root {
+            --bg-dark: #000000;
+            --card-bg: #080808;
+            --text-main: #f8fafc;
+            --text-dim: #c9c9c9;
+            --accent: #ffffff;
+            --accent-hover: #2563eb;
+            --nav-bg: rgba(0, 0, 0, 0.7);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+        body {
+            font-family: "Plus Jakarta Sans", sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            scroll-behavior: smooth;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: var(--transition);
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        nav {
+            position: sticky;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            backdrop-filter: blur(5px);
+            background: linear-gradient(180deg,rgba(0, 0, 0, 1) 0%, rgba(0, 0, 0, 0.94) 21%, rgba(0, 0, 0, 0.9) 36%, rgba(0, 0, 0, 0.72) 60%, rgba(0, 0, 0, 0.61) 72%, rgba(0, 0, 0, 0.48) 81%, rgba(0, 0, 0, 0.2) 92%, rgba(0, 0, 0, 0) 100%);
+            padding: 1rem 0;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--accent);
+            cursor: default;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .btn-github {
+            background: #1b1b1b;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            border: 1px solid #444;
+        }
+
+        .btn-github:hover {
+            background: #000000;
+            border-color: var(--accent);
+        }
+
+        .hero {
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background-image: url(src/HARMNY_background.jpg);
+            background-repeat: no-repeat;
+            background-size:cover;
+            position: relative;
+        }
+
+        .slide {
+            position: absolute;
+            inset: 0;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1.5s ease-in-out;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .slide.active {
+            opacity: 1;
+        }
+
+        .slide::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.6);
+        }
+
+        .slide-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .slide-content h1 {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            margin-bottom: 1rem;
+        }
+
+        .slide-content p {
+            font-size: clamp(1rem, 3vw, 1.5rem);
+            max-width: 700px;
+            color: var(--text-dim);
+        }
+
+        .scroll-hint {
+            position: absolute;
+            bottom: 30px;
+            animation: bounce 2s infinite ease-in-out;
+            color: var(--text-dim);
+            background: none;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);}
+            40% {transform: translateY(-10px);}
+            60% {transform: translateY(-5px);}
+        }
+
+        .download-section {
+            padding: 100px 0;
+            background: var(--bg-dark);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            background-color: transparent;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .download-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            padding: 3rem 2rem;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0);;
+            animation: ease-in-out 1s;
+            cursor: default;
+        }
+        
+        .card:hover {
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .card h3 {
+            margin: 1.5rem 0 1rem;
+            font-size: 1.4rem;
+        }
+
+        .card p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+        }
+
+        .btn-download {
+            display: inline-block;
+            background: var(--accent);
+            color: rgb(0, 0, 0);
+            padding: 0.8rem 2rem;
+            border-radius: 8px;
+            font-weight: bold;
+        }
+
+        .btn-download:hover {
+            box-shadow: 0px 0px 25px white;
+        }
+
+        .faq-section {
+            padding: 100px 0;
+            background: #0f0f0f;
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            margin-bottom: 1.5rem;
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+        }
+
+        .faq-item h4 {
+            margin-bottom: 0.5rem;
+            color: var(--accent);
+        }
+
+
+        #particle-canvas {
+           width: 100%;
+           height: 400px;
+           overflow: hidden;
+           align-items: center;
+           z-index: -100px;
+        }
+
+        footer {
+            padding: 3rem 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-dim);
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container nav-content">
+            <div class="logo">
+            <span>
+            <img src="/src/harmny_logo.png" height="25px" width="25px" style="transform: translateY(3.85px);">
+            HARMNY
+            </span>
+            </div>
+            <div class="nav-links">
+                <a href="#downloads">Download</a>
+                <a href="#faq">FAQ</a>
+                <a href="https://github.com/HARMNY-GROUP" target="_blank" class="btn-github">GitHub</a>
+            </div>
+        </div>
+    </nav>
+    <header class="hero">
+        <div class="slide active" style="background-image: url('https://images.unsplash.com/photo-14980501786e_14980501786e.jpg?auto=format&fit=crop&w=1600&q=80');">
+            <div class="slide-content">
+                <h1>Free Your Time</h1>
+                <p>Need to get something done fast or take a break? We got your back!</p>
+            </div>
+        </div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1555066931-43657a45f151?auto=format&fit=crop&w=1600&q=80');">
+            <div class="slide-content">
+                <h1>Productivity & Fun</h1>
+                <p>The perfect mix of productivity and entertainment</p>
+            </div>
+        </div>
+        <div class="slide" style="background-image: url('https://images.unsplash.com/photo-1518770660439-487e02a490b7?auto=format&fit=crop&w=1600&q=80');">
+            <div class="slide-content">
+                <h1>Secure & Encrypted</h1>
+                <p>Your privacy is our priority. We don't give a F*** about your data (in a good way)</p>
+            </div>
+        </div>
+
+        <div class="scroll-hint">↓ Scroll  to Download</div>
+    </header>
+          <div id="particle-canvas">
+          </div>
+          <br id="downloads">
+    <section class="download-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Join The HARMNY Network</h2>
+                <p style="color: var(--text-dim);">Choose the version that fits your needs, and your system.</p>
+            </div>
+
+            <div class="download-grid">
+                <!-- HTML -->
+                <div class="card">
+                    <h3>HARMNY Preview</h3>
+                    <p>Best for quick sharing and demonstration of our features</p>
+                    <a href="#" class="btn-download">Download .HTML</a>
+                </div>
+
+                <div class="card">
+                    <h3>HARMNY Client</h3>
+                    <p>Vanilla HARMNY install. Runs in your browser by default</p>
+                    <a href="#" class="btn-download">Download .ZIP</a>
+                </div>
+
+                <!-- Windows -->
+                <div class="card">
+                    <h3>+ Windows Addon</h3>
+                    <p>Native executable addon for Windows 10 & 11</p>
+                    <a href="#" class="btn-download">Download</a>
+                </div>
+
+                <!-- Linux -->
+                <div class="card">
+                    <h3>+ Linux Addon</h3>
+                    <p>Native program addon for distros that support AppImage</p>
+                    <a href="#" class="btn-download">Download</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="faq-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Frequently Asked Questions</h2>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item">
+                    <h4>Is the software free to use?</h4>
+                    <p>Yes, the HARMNY program itself and the HARMNY network is completely free to use, and open source.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>How do I update the application?</h4>
+                    <p>The app will automatically notify you of updates. For now you have to manually download the latest version from the buttons above, then import your data.</p>
+                </div>
+                <div class="faq-item">
+                    <h4>What operating systems are supported?</h4>
+                    <p>Anything that runs a browser!</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>HARMNY © 2026</p>
+    </footer>
+
+    <script>
+        // Hero Slider Logic
+        const slides = document.querySelectorAll('.slide');
+        let currentSlide = 0;
+
+        function showNextSlide() {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (currentSlide + 1) % slides.length;
+            slides[currentSlide].classList.add('active');
+        }
+
+        // Change slide every 5 seconds
+        setInterval(showNextSlide, 5000);
+    </script>
+    <script>
+        !function(a){var b="object"==typeof self&&self.self===self&&self||"object"==typeof global&&global.global===global&&global;"function"==typeof define&&define.amd?define(["exports"],function(c){b.ParticleNetwork=a(b,c)}):"object"==typeof module&&module.exports?module.exports=a(b,{}):b.ParticleNetwork=a(b,{})}(function(a,b){var c=function(a){this.canvas=a.canvas,this.g=a.g,this.particleColor=a.options.particleColor,this.x=Math.random()*this.canvas.width,this.y=Math.random()*this.canvas.height,this.velocity={x:(Math.random()-.5)*a.options.velocity,y:(Math.random()-.5)*a.options.velocity}};return c.prototype.update=function(){(this.x>this.canvas.width+20||this.x<-20)&&(this.velocity.x=-this.velocity.x),(this.y>this.canvas.height+20||this.y<-20)&&(this.velocity.y=-this.velocity.y),this.x+=this.velocity.x,this.y+=this.velocity.y},c.prototype.h=function(){this.g.beginPath(),this.g.fillStyle=this.particleColor,this.g.globalAlpha=.7,this.g.arc(this.x,this.y,1.5,0,2*Math.PI),this.g.fill()},b=function(a,b){this.i=a,this.i.size={width:this.i.offsetWidth,height:this.i.offsetHeight},b=void 0!==b?b:{},this.options={particleColor:void 0!==b.particleColor?b.particleColor:"#fff",background:void 0!==b.background?b.background:"#000",interactive:void 0!==b.interactive?b.interactive:!0,velocity:this.setVelocity(b.speed),density:this.j(b.density)},this.init()},b.prototype.init=function(){if(this.k=document.createElement("div"),this.i.appendChild(this.k),this.l(this.k,{position:"absolute",top:0,left:0,bottom:0,right:0,"z-index":1}),/(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(this.options.background))this.l(this.k,{background:this.options.background});else{if(!/\.(gif|jpg|jpeg|tiff|png)$/i.test(this.options.background))return console.error("Please specify a valid background image or hexadecimal color"),!1;this.l(this.k,{background:'url("'+this.options.background+'") no-repeat center',"background-size":"cover"})}if(!/(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)/i.test(this.options.particleColor))return console.error("Please specify a valid particleColor hexadecimal color"),!1;this.canvas=document.createElement("canvas"),this.i.appendChild(this.canvas),this.g=this.canvas.getContext("2d"),this.canvas.width=this.i.size.width,this.canvas.height=this.i.size.height,this.l(this.i,{position:"relative"}),this.l(this.canvas,{"z-index":"20",position:"relative"}),window.addEventListener("resize",function(){return this.i.offsetWidth===this.i.size.width&&this.i.offsetHeight===this.i.size.height?!1:(this.canvas.width=this.i.size.width=this.i.offsetWidth,this.canvas.height=this.i.size.height=this.i.offsetHeight,clearTimeout(this.m),void(this.m=setTimeout(function(){this.o=[];for(var a=0;a<this.canvas.width*this.canvas.height/this.options.density;a++)this.o.push(new c(this));this.options.interactive&&this.o.push(this.p),requestAnimationFrame(this.update.bind(this))}.bind(this),500)))}.bind(this)),this.o=[];for(var a=0;a<this.canvas.width*this.canvas.height/this.options.density;a++)this.o.push(new c(this));this.options.interactive&&(this.p=new c(this),this.p.velocity={x:0,y:0},this.o.push(this.p),this.canvas.addEventListener("mousemove",function(a){this.p.x=a.clientX-this.canvas.offsetLeft,this.p.y=a.clientY-this.canvas.offsetTop}.bind(this)),this.canvas.addEventListener("mouseup",function(a){this.p.velocity={x:(Math.random()-.5)*this.options.velocity,y:(Math.random()-.5)*this.options.velocity},this.p=new c(this),this.p.velocity={x:0,y:0},this.o.push(this.p)}.bind(this))),requestAnimationFrame(this.update.bind(this))},b.prototype.update=function(){this.g.clearRect(0,0,this.canvas.width,this.canvas.height),this.g.globalAlpha=1;for(var a=0;a<this.o.length;a++){this.o[a].update(),this.o[a].h();for(var b=this.o.length-1;b>a;b--){var c=Math.sqrt(Math.pow(this.o[a].x-this.o[b].x,2)+Math.pow(this.o[a].y-this.o[b].y,2));c>120||(this.g.beginPath(),this.g.strokeStyle=this.options.particleColor,this.g.globalAlpha=(120-c)/120,this.g.lineWidth=.7,this.g.moveTo(this.o[a].x,this.o[a].y),this.g.lineTo(this.o[b].x,this.o[b].y),this.g.stroke())}}0!==this.options.velocity&&requestAnimationFrame(this.update.bind(this))},b.prototype.setVelocity=function(a){return"fast"===a?1:"slow"===a?.33:"none"===a?0:.66},b.prototype.j=function(a){return"high"===a?5e3:"low"===a?2e4:isNaN(parseInt(a,10))?1e4:a},b.prototype.l=function(a,b){for(var c in b)a.style[c]=b[c]},b});
+
+// Initialisation
+
+var canvasDiv = document.getElementById('particle-canvas');
+var options = {
+  particleColor: '#888',
+  interactive: true,
+  speed: 'slow',
+  density: 'high'
+};
+var particleCanvas = new ParticleNetwork(canvasDiv, options);
+    </script>
+</body>
+</html>
